@@ -1,0 +1,51 @@
+button {
+	cursor: pointer;
+}
+
+/*Loading*/
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    position: fixed;
+    background-color: white;
+}
+
+.loading img {
+    margin: auto;
+    left: 0;
+    right: 0;
+    position: absolute;
+    margin-top: 89px;
+    height: 275px;
+}
+
+.loading div {
+    border: 16px solid white;
+    border-top: 16px solid #222;
+    border-radius: 50%;
+    width: 350px;
+    height: 350px;
+    animation: spin 3.3s linear infinite;
+    margin: auto;
+    margin-top: 55px;
+}
+
+
+/*Account*/
+.account .fa-check-circle {
+    color: #28a745;
+}
+.account .fa-times {
+    color: red;
+}
+.account .fa-check-circle {
+    color: green;
+}

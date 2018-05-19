@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Cherry</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css" integrity="sha384-5SOiIsAziJl6AWe0HWRKTXlfcSHKmYV4RBF18PPJ173Kzn7jzMyFuTtk8JA7QQG1" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/style.css">
+</head>
+<body>
+
+	<div id="app">
+        <div class="loading" v-show="loading"><img src="/images/logo.jpg" /><div></div></div>
+        <nav class="navbar navbar-expand-md navbar-light bg-light justify-content-between">
+            <a class="navbar-brand" href="#/"><img src="/images/logo.jpg" width="30" height="30" class="d-inline-block align-top" alt="">Cherry</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <router-link class="nav-item nav-link" to="/">Home</router-link>
+                <router-link class="nav-item nav-link" to="/account" v-show="user">Account</router-link>
+                <a href="#" class="nav-item nav-link" data-target="#login-modal" data-toggle="modal" v-show="!user">Login</a>
+                <a href="#" class="nav-item nav-link" data-target="#signup-modal" data-toggle="modal" v-show="!user">Signup</a>
+                <a href="#" class="nav-item nav-link" @click="logout" v-show="user" v-show="user">Logout</a>
+            </div>
+        </nav>
+        <div class="container pt-3">
+		  <router-view></router-view>
+        </div>
+		<login-modal></login-modal>
+        <signup-modal></signup-modal>
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.0"></script>
+	<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+    <script src="/libs/jquery/jquery.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.4/moment.min.js"></script>
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/core.min.js"></script>
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/sha256.min.js"></script>
+    <script src="/libs/trex/trex.js"></script>
+    <script src="/settings.js"></script>
+    <script src="/Library.js"></script>
+    <script src="/components/Home.js"></script>
+    <script src="/components/Account.js"></script>
+    <script src="/components/SignupModal.js"></script>
+    <script src="/components/LoginModal.js"></script>
+    <script src="/router.js"></script>
+    <script src="/main.js"></script>
+</body>
+</html>
