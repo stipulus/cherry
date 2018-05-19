@@ -13,8 +13,8 @@ var Account = Vue.component('Account', {
         <div class="mb-1">
             <div class="alert alert-danger" v-show="alert" role="alert">{{ alert }}</div>
         </div>
-    	<button class="btn btn-outline-primary btn-md ml-1 float-right" @click="save">Save Changes</button>
-		<button class="btn btn-outline-secondary btn-md float-right" @click="cancel">Cancel</button>
+    	<!--button class="btn btn-outline-primary btn-md ml-1 float-right" @click="save">Save Changes</button>
+		<button class="btn btn-outline-secondary btn-md float-right" @click="cancel">Cancel</button-->
 		<div id="change-password-modal" class="modal fade" tabindex="-1" role="dialog">
 		    <div class="modal-dialog" role="document">
 		        <div class="modal-content">
