@@ -7,7 +7,11 @@ var Account = Vue.component('Account', {
             <label for="accountEmail">Email address</label>
             <div class="input-group">
             	<input type="email" required name="email" class="form-control" id="accountEmail" placeholder="Enter email" v-model="user.email">
-            	<div class="input-group-append"><span class="input-group-text"><i class="fa fa-spinner fa-spin fa-lg" v-show="checkingEmail"></i><i class="fa fa-times fa-lg" v-show="!emailIsAvailable && !checkingEmail"></i><i class="fa fa-check-circle fa-lg" v-show="emailIsAvailable && !checkingEmail"></i></span></div>
+            	<div class="input-group-append"><span class="input-group-text">
+            		<i class="fa fa-spinner fa-spin fa-lg" v-show="checkingEmail" title="Pending..."></i>
+            		<i class="fa fa-times fa-lg" v-show="!emailIsAvailable && !checkingEmail" :title="user.email + ' is already associated with an account.'"></i>
+            		<i class="fa fa-check-circle fa-lg" v-show="emailIsAvailable && !checkingEmail"></i>
+            	</span></div>
             </div>
         </div>
         <div class="mb-1">
@@ -117,7 +121,6 @@ var Account = Vue.component('Account', {
 			})
 		},
 		emailAvailable: function (email, resolve, reject) {
-			console.log(email);
 			this.$http.get('/user/emailIsAvailable',{params:{email:email}}).then(resolve).catch(reject);
 		}
 	}
