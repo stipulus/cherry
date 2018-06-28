@@ -47,16 +47,16 @@ var LoginModal = Vue.component('login-modal', {
 			var self = this;
 			if(this.user.email === '') return this.alert = 'Email is required.';
 			if(this.user.password === '') return this.alert = 'A password is required.';
-			this.$parent.loading = true;
+			//this.$parent.loading = true;
 			//show loading
-			this.$http.post('/user/login',{email:this.user.email,password:CryptoJS.SHA256(this.user.password).toString()}).then(res => {
+			this.$store.dispatch('login', this.user).then(res => {
 				app.loadUser(res.data);
 				$('#login-modal').modal('hide');
 				//hide loading
-				app.loading = false;
+				//app.loading = false;
 			}).catch(res => {
 				//hide loading
-				app.loading = false;
+				//app.loading = false;
 				if(res.bodyText && res.bodyText !== '{}') {
 					self.alert = res.bodyText;
 				} else {

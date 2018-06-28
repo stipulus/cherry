@@ -1,9 +1,14 @@
 var app = new Vue({
 	el: '#app',
+	store,
 	router,
 	data: {
-		loading:false,
 		user:null
+	},
+	computed: {
+		loading: function () {
+			return this.$store.getters.loading;
+		}
 	},
 	methods: {
 		loadUser: function (data) {
