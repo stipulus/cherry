@@ -89,7 +89,8 @@ var Account = Vue.component('Account', {
 		}
 	},
 	created: function () {
-		this.user.email = (this.$parent.user)?this.$parent.user.email:'';
+		console.log(this.$store.state);
+		this.user.email = (this.$store.state.user)?this.$store.state.user.email:'';
 		//use debounce to limit the amount of calls made to api
 		this.debouncedEmailAvailable = _.debounce(this.emailAvailable, 900);
 	},

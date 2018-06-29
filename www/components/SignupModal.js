@@ -48,22 +48,20 @@ var SignupModal = Vue.component('signup-modal', {
 		}
 	},
 	methods: {
-		submit: function () {
-			var self = this;
+		validate: function () {
 			if(this.user.email === '') return this.alert = 'Email is required.';
 			if(this.user.password === '') return this.alert = 'A password is required.';
 			if(this.user.password2 !== this.user.password) return this.alert = 'Passwords do not match.';
-			this.$parent.loading = true;
-			//show loading
-			this.$http.post('/user',{email:this.user.email,password:CryptoJS.SHA256(this.user.password).toString()}).then(res => {
-				app.loadUser(res.data);
+		},
+		submit: function () {
+			var self = this;
+			var error = this.validate();
+			if(error) return error;
+
+			this.$store.dispatch('signup', this.user).then(res => {
 				$('#signup-modal').modal('hide');
-				//hide loading
-				this.$parent.loading = false;
 			}).catch(res => {
-				//hide loading
-				this.$parent.loading = false;
-				if(res.bodyText && res.bodyText !== '{}') {
+				if(res && res.bodyText && res.bodyText !== '{}') {
 					self.alert = res.bodyText;
 				} else {
 					self.alert = 'An unknown error has occured. Please try again later.';

@@ -24,13 +24,15 @@ UserSchema.methods.create = function (data) {
 				} else {
 					var user = new User(data);
 					user.save().then(function () {
+						user = JSON.parse(JSON.stringify(user));
 						token.value = jwt.sign({id:user._id,_id:user._id}, CONFIG.secretKey, {
 			                expiresIn: '366 days'
 			            });
 			            token.expires = new Date();
 					    token.expires.setFullYear(token.expires.getFullYear() + 1);
 					    user.password = null;
-			            resolve({token,user});
+					    user.token = token;
+			            resolve(user);
 					}).catch(reject);
 				}
 			}).catch(reject);
@@ -51,13 +53,15 @@ UserSchema.methods.login = function (data) {
 			User.findOne({email:data.email}).then(user => {
 				if(user) {
 					if(user.password === data.password) {
+						user = JSON.parse(JSON.stringify(user));
 						token.value = jwt.sign({id:user._id,_id:user._id}, CONFIG.secretKey, {
 			                expiresIn: '366 days'
 			            });
 			            token.expires = new Date();
 					    token.expires.setFullYear(token.expires.getFullYear() + 1);
 					    user.password = null;
-			            resolve({token,user});
+					    user.token = token;
+			            resolve(user);
 					} else reject({status:400,message:'Incorrect Password.'});
 				} else {
 					reject({status:400,message:data.email+' is not registered to an account.'});

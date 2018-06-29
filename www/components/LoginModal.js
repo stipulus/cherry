@@ -43,26 +43,27 @@ var LoginModal = Vue.component('login-modal', {
 		}
 	},
 	methods: {
-		submit: function () {
-			var self = this;
+		validate: function () {
 			if(this.user.email === '') return this.alert = 'Email is required.';
 			if(this.user.password === '') return this.alert = 'A password is required.';
-			//this.$parent.loading = true;
-			//show loading
+		},
+		submit: function () {
+			var self = this;
+			var error = this.validate();
+			if(error) return error;
+
 			this.$store.dispatch('login', this.user).then(res => {
-				app.loadUser(res.data);
 				$('#login-modal').modal('hide');
-				//hide loading
-				//app.loading = false;
 			}).catch(res => {
-				//hide loading
-				//app.loading = false;
-				if(res.bodyText && res.bodyText !== '{}') {
+				if(res && res.bodyText && res.bodyText !== '{}') {
 					self.alert = res.bodyText;
 				} else {
 					self.alert = 'An unknown error has occured. Please try again later.';
 				}
 			});
+
+			//clear password after used
+			this.user.password = null;
 		}
 	}
 });
